@@ -4,6 +4,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../classes/Connection.class.php';
+include "../env_autoloader.php";
 
 $app = AppFactory::create();
 
@@ -31,9 +33,23 @@ https://stackoverflow.com/questions/60341595/error-in-index-php-file-to-create-r
 
 
 */
-$app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
+$app->get('/structures', function (Request $request, Response $response, $args) {
+  
+    $query = "mysql:host=".env("DB_HOST").";dbname=".env("DB_NAME").";charset=utf8";
+    $user = env("DB_USERNAME");
+    $pass = env("DB_PASSWORD");
+
+    $conn = new Connection($query, $user, $pass);
+    $pdo = $conn->connection();
+
+    $st = $pdo->prepare("SELECT * FROM `structures`");
+    $st->execute();
+    $array = $st->fetch();
+    $json = json_encode($array);
+    $response->getBody()->write($json);  
     return $response;
+    
+
 });
 
 $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
