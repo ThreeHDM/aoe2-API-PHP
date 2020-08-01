@@ -3,15 +3,16 @@
 class Connection 
 {
     //Propiedades
-    public $query;
-    public $user;
-    public $pass;
+    private $query;
+    private $user; 
+    private $pass; 
+
 
     //Constructor
-    public function __construct($query, $user, $pass) {
-        $this->query = $query;
-        $this->user = $user;
-        $this->pass = $pass;
+    public function __construct() {
+        $this->query = "mysql:host=".env("DB_HOST").";dbname=".env("DB_NAME").";charset=utf8";
+        $this->user = env("DB_USERNAME");
+        $this->pass = env("DB_PASSWORD");
     }
 
     //Metodos
