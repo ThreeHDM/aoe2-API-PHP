@@ -1,4 +1,7 @@
 <?php
+namespace MyApp\Data;
+
+use \PDO;
 
 class Connection 
 {

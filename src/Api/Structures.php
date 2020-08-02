@@ -1,6 +1,13 @@
 <?php
+namespace MyApp\Api;
 
-require __DIR__ . '/../classes/Connection.class.php';
+use MyApp\Data\Connection;
+use \PDO;
+
+require __DIR__ . '/../../vendor/autoload.php';
+
+
+//require __DIR__ . '/../classes/Connection.class.php';
 
 class Structures  
 {

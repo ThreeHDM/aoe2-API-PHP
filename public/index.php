@@ -2,10 +2,13 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+use MyApp\Data\Connection;
+use MyApp\Api\Structures;
+
 
 require __DIR__ . '/../vendor/autoload.php';
 include "../env_autoloader.php";
-require __DIR__ . '/../classes/Structures.class.php';
+//require __DIR__ . '/../classes/Structures.class.php';
 
 $app = AppFactory::create();
 
