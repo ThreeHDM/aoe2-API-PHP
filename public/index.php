@@ -1,4 +1,7 @@
 <?php
+/**
+ * @OA\Info(title="Age API", version="1.0.0")
+ */
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -41,6 +44,12 @@ https://stackoverflow.com/questions/60341595/error-in-index-php-file-to-create-r
 //------------------CONSULTAS A LA BDD--------------------------------
 //------------------EDIFICIOS--------------------------------
 
+/**
+ * @OA\Get(
+ *     path="/structures",
+ *     @OA\Response(response="200", description="Lists all structures")
+ * )
+ */
 $app->get('/structures', function (Request $request, Response $response, $args) {
     $json = Structures::getAll();
     $response->getBody()->write($json);  

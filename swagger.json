@@ -1,0 +1,18 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Age API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/structures": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Lists all structures"
+                    }
+                }
+            }
+        }
+    }
+}
