@@ -3,12 +3,14 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use MyApp\Data\Connection;
-use MyApp\Api\Structures;
+use MyApp\Api\Structures; //no es un directorio, pero tiene que coincidir con la rutaparaencontrar las clases!
+use MyApp\Api\Units;
+use MyApp\Api\Technologies;
+use MyApp\Api\Civilizations;
 
-
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php'; //require del composer
 include "../env_autoloader.php";
-//require __DIR__ . '/../classes/Structures.class.php';
+//require __DIR__ . '/../classes/Structures.class.php'; (antes usabamos esto)
 
 $app = AppFactory::create();
 
@@ -34,8 +36,10 @@ $app->setBasePath((function () {
 solución al not found error de la librería
 https://stackoverflow.com/questions/60341595/error-in-index-php-file-to-create-rest-api-using-slim-framework
 
-
 */
+
+//------------------CONSULTAS A LA BDD--------------------------------
+//------------------EDIFICIOS--------------------------------
 
 $app->get('/structures', function (Request $request, Response $response, $args) {
     $json = Structures::getAll();
@@ -49,6 +53,51 @@ $app->get('/structures/{id}', function (Request $request, Response $response, $a
     return $response;
 });
 
+//------------------UNIDADES--------------------------------
+
+$app->get('/units', function (Request $request, Response $response, $args) {
+    $json = Units::getAll();
+    $response->getBody()->write($json);  
+    return $response;
+});
+
+$app->get('/units/{id}', function (Request $request, Response $response, $args) {
+    $json = Units::getById($args['id']);
+    $response->getBody()->write($json);  
+    return $response;
+});
+
+//------------------TECNOLOGIAS--------------------------------
+
+$app->get('/technologies', function (Request $request, Response $response, $args) {
+    $json = Technologies::getAll();
+    $response->getBody()->write($json);  
+    return $response;
+});
+
+$app->get('/technologies/{id}', function (Request $request, Response $response, $args) {
+    $json = Technologies::getById($args['id']);
+    $response->getBody()->write($json);  
+    return $response;
+});
+
+//------------------CIVILIZACIONES--------------------------------
+
+$app->get('/civilizations', function (Request $request, Response $response, $args) {
+    $json = Civilizations::getAll();
+    $response->getBody()->write($json);  
+    return $response;
+});
+
+$app->get('/civilizations/{id}', function (Request $request, Response $response, $args) {
+    $json = Civilizations::getById($args['id']);
+    $response->getBody()->write($json);  
+    return $response;
+});
+
+
+
+//------------------TESTS DE LA FUNCION SLIM--------------------------------
 
 $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
     $name = $args['name'];
